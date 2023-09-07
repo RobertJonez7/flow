@@ -1,7 +1,8 @@
 import "../App.css";
 import React from "react";
+import { LegendValueProps } from "../types";
 
-const LegendValue = ({ title, color }) => {
+const LegendValue = ({ title, color }: LegendValueProps): JSX.Element => {
   return (
     <div className="legend-value-container">
       <div className="box" style={{ backgroundColor: color }} />

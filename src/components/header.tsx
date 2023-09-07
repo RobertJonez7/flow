@@ -1,7 +1,8 @@
 import "../App.css";
 import React from "react";
+import { HeaderProps } from "../types";
 
-const Header = ({ isOpen, title }) => {
+const Header = ({ isOpen, title }: HeaderProps): JSX.Element => {
   return (
     <div className="header">
       <p
