@@ -1,7 +1,7 @@
 import "../App.css";
 import React from "react";
 
-const Header = ({ isOpen }) => {
+const Header = ({ isOpen, title }) => {
   return (
     <div className="header">
       <p
@@ -10,7 +10,7 @@ const Header = ({ isOpen }) => {
           marginRight: isOpen ? "14em" : 0,
         }}
       >
-        FLOW
+        {title}
       </p>
     </div>
   );

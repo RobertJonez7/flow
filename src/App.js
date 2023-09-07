@@ -11,6 +11,7 @@ function App() {
   const [theme, toggleTheme] = useState("light");
 
   const sideBarProps = { toggleOpen, isOpen, toggleTheme, theme, data };
+  const headerProps = { isOpen, title: "FLOW" };
   const gridProps = {
     className: "grid-container",
     key: theme,
@@ -25,12 +26,12 @@ function App() {
   };
 
   return (
-    <div className="App" data-theme={theme}>
-      <Header isOpen={isOpen} />
+    <body className="App" data-theme={theme}>
+      <Header {...headerProps} />
       <Sidebar {...sideBarProps} />
       <Button {...buttonProps} />
       <Grid {...gridProps} />
-    </div>
+    </body>
   );
 }
 
