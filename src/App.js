@@ -1,23 +1,35 @@
-import logo from './logo.svg';
-import './App.css';
+import "./App.css";
+import Sidebar from "./components/sidebar";
+import Header from "./components/header";
+import Button from "./components/button";
+import Grid from "./components/grid";
+import data from "./test/data";
+import { useState } from "react";
 
 function App() {
+  const [isOpen, toggleOpen] = useState(true);
+  const [theme, toggleTheme] = useState("light");
+
+  const sideBarProps = { toggleOpen, isOpen, toggleTheme, theme, data };
+  const gridProps = {
+    className: "grid-container",
+    key: theme,
+    isOpen,
+    theme,
+    data,
+  };
+  const buttonProps = {
+    className: "toggle-open-button",
+    fn: () => toggleOpen(true),
+    title: "<<",
+  };
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className="App" data-theme={theme}>
+      <Header isOpen={isOpen} />
+      <Sidebar {...sideBarProps} />
+      <Button {...buttonProps} />
+      <Grid {...gridProps} />
     </div>
   );
 }
