@@ -88,3 +88,8 @@ export type InitCanvasArgs = {
   width: number;
   height: number;
 };
+
+export type GenerateToolTipArgs = {
+  coordinates: Intersections;
+  directions: any;
+};

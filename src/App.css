@@ -163,10 +163,12 @@ body {
 
 .settings-content {
   display: flex;
+  flex-direction: column;
+  gap: 1em;
 }
 
 h3 {
-  margin-bottom: 1.25em;
+  margin-bottom: 1.5em;
 }
 
 /* Switch CSS */
@@ -231,4 +233,57 @@ input:checked + .slider:before {
 
 .slider.round:before {
   border-radius: 50%;
+}
+
+/* Select */
+.select {
+  border: 1px solid var(--border);
+  color: var(--color);
+  background-color: var(--primary);
+  border-radius: 0.5em;
+  height: 2.5em;
+}
+
+/* Tooltip */
+.tooltip {
+  width: 40px;
+  height: 40px;
+  border-radius: 40px;
+}
+
+.tooltip-container {
+  display: flex;
+  justify-content: center;
+  transition: 150ms;
+  display: none;
+}
+
+.tooltip-element {
+  position: absolute;
+  top: 2em;
+  width: 10em;
+  min-height: 2em;
+  background-color: var(--table-border-secondary);
+  border: 1px solid var(--table-border);
+  color: var(--secondary);
+  padding: 0.25em;
+}
+
+.tooltip:hover .tooltip-container {
+  display: flex;
+}
+
+.arrow-up {
+  position: relative;
+  top: 1.5em;
+  width: 0;
+  height: 0;
+  border-left: 10px solid transparent;
+  border-right: 10px solid transparent;
+  border-bottom: 10px solid var(--table-border-secondary);
+  z-index: 10;
+}
+
+.dom-overlay {
+  position: absolute;
 }

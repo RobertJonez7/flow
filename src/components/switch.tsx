@@ -1,5 +1,4 @@
 import "../App.css";
-import React from "react";
 import { SwitchProps } from "../types";
 
 const Switch = ({ checked, fn }: SwitchProps): JSX.Element => {

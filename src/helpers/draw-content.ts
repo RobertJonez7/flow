@@ -1,4 +1,4 @@
-import { DrawContentArgs } from "../types";
+import { DrawContentArgs, Intersections } from "../types";
 import { drawArrow } from "./draw-arrow";
 
 export const drawContent = ({
@@ -6,6 +6,8 @@ export const drawContent = ({
   ctx,
   directions,
 }: DrawContentArgs) => {
+  const endCoordinates: Intersections = {};
+
   for (const d in directions) {
     const row = coordinates[`row-${d}`];
     const direction = directions[d];
@@ -22,5 +24,12 @@ export const drawContent = ({
       radius: 5,
       ctx,
     });
+
+    endCoordinates[d] = {
+      x: row[`bottom-${direction?.tgt_node}-x`],
+      y: row[`bottom-${direction?.tgt_node}-y`],
+    };
   }
+
+  return endCoordinates;
 };

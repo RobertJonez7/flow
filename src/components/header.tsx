@@ -1,5 +1,4 @@
 import "../App.css";
-import React from "react";
 import { HeaderProps } from "../types";
 
 const Header = ({ isOpen, title }: HeaderProps): JSX.Element => {

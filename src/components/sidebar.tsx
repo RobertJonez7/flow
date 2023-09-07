@@ -2,7 +2,6 @@ import "../App.css";
 import LegendValue from "./legend-value";
 import Switch from "./switch";
 import Button from "./button";
-import React from "react";
 import { SidebarProps } from "../types";
 
 const Sidebar = ({
@@ -30,15 +29,17 @@ const Sidebar = ({
         <div className="section">
           <h3>Settings</h3>
           <div className="settings-content">
-            <Switch
-              fn={() =>
-                toggleTheme((theme: string) =>
-                  theme === "light" ? "dark" : "light"
-                )
-              }
-              checked={theme === "dark"}
-            />{" "}
-            Dark Mode
+            <div>
+              <Switch
+                fn={() =>
+                  toggleTheme((theme: string) =>
+                    theme === "light" ? "dark" : "light"
+                  )
+                }
+                checked={theme === "dark"}
+              />{" "}
+              <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
+            </div>
           </div>
         </div>
         <div className="toggle-button">

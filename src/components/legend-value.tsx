@@ -1,5 +1,4 @@
 import "../App.css";
-import React from "react";
 import { LegendValueProps } from "../types";
 
 const LegendValue = ({ title, color }: LegendValueProps): JSX.Element => {
