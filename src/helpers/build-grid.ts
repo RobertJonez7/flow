@@ -1,4 +1,9 @@
-export const buildGrid = ({ width, height, offsetX, offsetY, ctx }, theme) => {
+import { BuildGridArgs } from "../types";
+
+export const buildGrid = (
+  { width, height, offsetX, offsetY, ctx }: BuildGridArgs,
+  theme: string
+) => {
   // Row lines
   for (let y = offsetY; y < height; y += offsetY) {
     ctx.beginPath();

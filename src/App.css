@@ -131,15 +131,19 @@ body {
 }
 
 /* Sidebar CSS */
-.sidebar {
+.sidebar-container {
   position: fixed;
   z-index: 100;
   right: 0;
   top: 0;
   height: 100%;
+  transition: 500ms;
+}
+
+.sidebar {
   border-left: 1px solid var(--border);
   background-color: var(--secondary);
-  transition: 500ms;
+  height: 100%;
 }
 
 .section {

@@ -6,7 +6,7 @@ import Grid from "./components/grid";
 import data from "./test/data";
 import { useState } from "react";
 
-function App() {
+const App = () => {
   const [isOpen, toggleOpen] = useState(true);
   const [theme, toggleTheme] = useState("light");
 
@@ -33,6 +33,6 @@ function App() {
       <Grid {...gridProps} />
     </body>
   );
-}
+};
 
 export default App;
