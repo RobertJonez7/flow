@@ -8,13 +8,14 @@ const generateTooltips = (coordinates: Intersections) => {
     try {
       return (
         <div
-          style={{ position: "absolute", top: val?.y - 15, left: val?.x - 20 }}
+          style={{
+            position: "absolute",
+            top: val?.y - 15,
+            left: val?.x + (val?.increment ? -12 : -25),
+          }}
         >
           {React.createElement(Tooltip, {
-            text: `Lorem ipsum dolor sit amet consectetur, adipisicing elit. Dolor,
-          corporis animi. Architecto doloremque distinctio totam sit debitis
-          quia vero dolor, earum quas quo est voluptatum, asperiores natus
-          incidunt amet atque!`,
+            text: val?.description,
           })}
         </div>
       );

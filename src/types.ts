@@ -9,11 +9,16 @@ export type SwitchProps = {
   fn: any;
 };
 
+export type ColorPallete = {
+  [n: string]: string;
+};
+
 export type GridProps = {
   data: any;
   theme: string;
   isOpen: boolean;
   className: string;
+  colorPallete: ColorPallete;
 };
 
 export type HeaderProps = {
@@ -27,7 +32,7 @@ export type LegendValueProps = {
 };
 
 export type SidebarProps = {
-  data: any;
+  colorPallete: ColorPallete;
   toggleOpen: any;
   isOpen: boolean;
   toggleTheme: any;
@@ -80,6 +85,7 @@ export type DrawContentArgs = {
   coordinates: Intersections;
   directions: any;
   ctx: any;
+  colorPallete: ColorPallete;
 };
 
 export type InitCanvasArgs = {

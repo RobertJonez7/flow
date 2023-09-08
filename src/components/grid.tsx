@@ -7,17 +7,28 @@ import { drawContent } from "../helpers/draw-content";
 import { initCanvas } from "../helpers/init-canvas";
 import { buildGrid } from "../helpers/build-grid";
 
-const Grid = ({ data, theme, isOpen, className }: GridProps): JSX.Element => {
+const Grid = ({
+  data,
+  theme,
+  isOpen,
+  className,
+  colorPallete,
+}: GridProps): JSX.Element => {
   const [tooltipCoordinates, setTooltipCoordinates] = useState<any>({});
   const canvasRef = useRef(null);
+
+  const numOfRows = Object.values(data).reduce((num: number, val: any) => {
+    if (val?.rcvd_time > num) num = val?.rcvd_time;
+    return num;
+  }, 0);
 
   useEffect(() => {
     const options: GridOptions = {
       canvas: canvasRef.current as unknown as HTMLCanvasElement,
-      width: (data?.columns?.length - 1) * 230,
-      height: data?.rows?.length * 50,
-      cols: data?.columns?.length - 1,
-      rows: data?.rows?.length,
+      width: 3 * 230, //(data?.columns?.length - 1) * 230,
+      height: 22 * 50, //data?.rows?.length * 50,
+      rows: numOfRows,
+      cols: 3,
       offsetX: 0,
       offsetY: 0,
       ctx: 0,
@@ -34,8 +45,9 @@ const Grid = ({ data, theme, isOpen, className }: GridProps): JSX.Element => {
       const coordinates = computeIntersectionsCoordinates(options);
       const tooltipC = drawContent({
         coordinates,
+        colorPallete,
         ctx: options?.ctx,
-        directions: data?.directions,
+        directions: data,
       });
 
       setTooltipCoordinates(tooltipC);
@@ -43,26 +55,39 @@ const Grid = ({ data, theme, isOpen, className }: GridProps): JSX.Element => {
     render();
   }, []);
 
-  const siderItems = data.rows.map((r: string) => (
-    <div className="sider-item" key={r}>
-      {r}
-    </div>
-  ));
+  const rowHeaders = Array(numOfRows + 1)
+    .fill(0)
+    .map((n, i) => n + i)
+    .map((r: number) => <div key={r}>{r}</div>);
+
+  const columnHeaders = [
+    "TEST: 0x0",
+    "TEST: 0x3",
+    "TEST: 0x4",
+    "TEST: 0x40",
+  ].map((c: string) => <div>{c}</div>);
 
   return (
     <div className={className} style={{ marginRight: isOpen ? "25em" : 0 }}>
-      <div className="sider">{siderItems}</div>
-      <canvas ref={canvasRef} className="canvas" />
-      <div
-        className="dom-overlay"
-        style={{
-          width: (data?.columns?.length - 1) * 230,
-          height: data?.rows?.length * 50,
-        }}
-      >
-        {generateTooltips(tooltipCoordinates)}
+      <div className="column-headers" style={{ width: 3 * 230 + 60 }}>
+        {columnHeaders}
       </div>
-      <div className="sider-right">{siderItems}</div>
+      <div className="grid">
+        <div className="row-headers">{rowHeaders}</div>
+        <div>
+          <canvas ref={canvasRef} className="canvas" />
+        </div>
+        <div
+          className="dom-overlay"
+          style={{
+            width: 3 * 230,
+            height: numOfRows * 50,
+          }}
+        >
+          {generateTooltips(tooltipCoordinates)}
+        </div>
+        <div className="row-headers-right">{rowHeaders}</div>
+      </div>
     </div>
   );
 };
