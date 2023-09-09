@@ -105,15 +105,21 @@ body {
   transition: 300ms;
 }
 
+.button:disabled {
+  background-color: #b4ddff;
+  cursor: default;
+}
+
+.data-found {
+  margin-top: 5em;
+  transition: 300ms;
+  font-weight: bold;
+}
+
 /* Grid CSS */
 .canvas {
-  /* border-top: 1px solid var(--table-border-secondary);
-  border-bottom: 1px solid var(--table-border-secondary);
-  border-left: 2px solid var(--table-border);
-  border-right: 2px solid var(--table-border); */
   margin: 1em;
   margin-top: 2em;
-  /* padding: 2em; */
 }
 
 /* Header CSS */
@@ -203,6 +209,7 @@ h3 {
   width: 0;
   height: 0;
 }
+
 .slider {
   position: absolute;
   cursor: pointer;
@@ -306,4 +313,36 @@ input:checked + .slider:before {
 .dom-overlay {
   position: absolute;
   margin-top: 2em;
+}
+
+.loader {
+  border: 6px solid var(--border);
+  border-top: 6px solid #2196f3;
+  border-radius: 50%;
+  width: 24px;
+  height: 24px;
+  animation: spin 2s linear infinite;
+}
+
+.loading-container {
+  display: flex;
+  justify-content: center;
+  gap: 1em;
+  font-size: 1.5em;
+  height: 100vh;
+}
+
+.error {
+  font-size: 1.5em;
+  color: rgb(224, 12, 12);
+  height: 100vh;
+}
+
+@keyframes spin {
+  0% {
+    transform: rotate(0deg);
+  }
+  100% {
+    transform: rotate(360deg);
+  }
 }

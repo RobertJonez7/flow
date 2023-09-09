@@ -10,6 +10,7 @@ const Sidebar = ({
   colorPallete,
   toggleTheme,
   toggleOpen,
+  loading,
   isOpen,
   theme,
 }: SidebarProps) => {
@@ -39,6 +40,7 @@ const Sidebar = ({
                   )
                 }
                 checked={theme === "dark"}
+                disabled={loading}
               />{" "}
               <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
             </div>
@@ -48,6 +50,7 @@ const Sidebar = ({
                   toggleDescriptions((description: boolean) => !description)
                 }
                 checked={descriptions}
+                disabled={loading}
               />{" "}
               <span>
                 {descriptions ? "Hide Descriptions" : "Show Descriptions"}
@@ -56,7 +59,7 @@ const Sidebar = ({
           </div>
         </div>
         <div className="toggle-button">
-          <Button title=">>" fn={() => toggleOpen(false)} />
+          <Button title=">>" fn={() => toggleOpen(false)} disabled={loading} />
         </div>
       </div>
     </div>
