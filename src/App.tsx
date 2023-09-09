@@ -1,9 +1,9 @@
 import "./App.css";
 import response from "./test/test-data";
-import Sidebar from "./components/Sidebars";
+import Sidebar from "./components/Sidebar";
 import Header from "./components/Header";
 import Button from "./components/Button";
-import Grid from "./components/Grids";
+import Grid from "./components/Grid";
 import { createColorPallete } from "./helpers/create-color-pallete";
 import { useState } from "react";
 
