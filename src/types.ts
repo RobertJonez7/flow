@@ -19,6 +19,7 @@ export type GridProps = {
   isOpen: boolean;
   className: string;
   colorPallete: ColorPallete;
+  descriptions: boolean;
 };
 
 export type HeaderProps = {
@@ -37,6 +38,8 @@ export type SidebarProps = {
   isOpen: boolean;
   toggleTheme: any;
   theme: string;
+  toggleDescriptions: any;
+  descriptions: boolean;
 };
 
 export type GridOptions = {

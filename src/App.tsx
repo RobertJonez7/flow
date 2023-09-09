@@ -10,20 +10,24 @@ import { useState } from "react";
 const App = () => {
   const [isOpen, toggleOpen] = useState(true);
   const [theme, toggleTheme] = useState("light");
+  const [descriptions, toggleDescriptions] = useState(false);
 
   const colorPallete = createColorPallete(response?.data);
 
   const sideBarProps = {
+    toggleDescriptions,
+    descriptions,
     colorPallete,
+    toggleTheme,
     toggleOpen,
     isOpen,
-    toggleTheme,
     theme,
   };
   const headerProps = { isOpen, title: "ALL FLOWS" };
   const gridProps = {
     className: "grid-container",
     colorPallete,
+    descriptions,
     key: theme,
     response,
     isOpen,

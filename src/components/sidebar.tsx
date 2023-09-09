@@ -5,10 +5,12 @@ import Button from "./Button";
 import { SidebarProps } from "../types";
 
 const Sidebar = ({
+  toggleDescriptions,
+  descriptions,
   colorPallete,
+  toggleTheme,
   toggleOpen,
   isOpen,
-  toggleTheme,
   theme,
 }: SidebarProps) => {
   return (
@@ -39,6 +41,17 @@ const Sidebar = ({
                 checked={theme === "dark"}
               />{" "}
               <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
+            </div>
+            <div>
+              <Switch
+                fn={() =>
+                  toggleDescriptions((description: boolean) => !description)
+                }
+                checked={descriptions}
+              />{" "}
+              <span>
+                {descriptions ? "Hide Descriptions" : "Show Descriptions"}
+              </span>
             </div>
           </div>
         </div>

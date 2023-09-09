@@ -8,11 +8,12 @@ import { initCanvas } from "../helpers/init-canvas";
 import { buildGrid } from "../helpers/build-grid";
 
 const Grid = ({
-  theme,
-  isOpen,
-  response,
-  className,
   colorPallete,
+  descriptions,
+  className,
+  response,
+  isOpen,
+  theme,
 }: GridProps): JSX.Element => {
   const [tooltipCoordinates, setTooltipCoordinates] = useState<any>({});
   const canvasRef = useRef(null);
@@ -48,7 +49,7 @@ const Grid = ({
       initCanvas(options);
       buildGrid(options, theme);
       const coordinates = computeIntersectionsCoordinates(options);
-      const tooltipCoordinates = drawContent({
+      const tooltipCoordinates = drawContent(descriptions, {
         data: response?.data,
         ctx: options?.ctx,
         colorPallete,
@@ -58,7 +59,7 @@ const Grid = ({
       setTooltipCoordinates(tooltipCoordinates);
     };
     render();
-  }, []);
+  }, [descriptions, response]);
 
   return (
     <div className={className} style={{ marginRight: isOpen ? "25em" : 0 }}>
