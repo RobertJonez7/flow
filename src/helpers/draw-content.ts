@@ -15,14 +15,14 @@ export const drawContent = (
     const toY = coordinates[val?.rcvd_time][`${headers[val?.tgt_node]}-y`];
 
     ctx.strokeStyle = color;
-    ctx.lineWidth = 2;
+    ctx.lineWidth = 2.5;
 
     drawArrow({
-      toX: toX + (increment ? +7 : -7),
+      toX: toX + (increment ? +7 : -7) + 100,
+      fromX: fromX + 100,
       toY: toY - 5,
       radius: 5,
       color,
-      fromX,
       fromY,
       ctx,
     });
@@ -31,8 +31,8 @@ export const drawContent = (
       ctx.font = "14px Arial";
       ctx.fillText(
         val?.description,
-        increment ? (fromX + toX - 35) / 2 : (toX + fromX - 35) / 2,
-        increment ? (toY + fromY - 15) / 2 : (toY + fromY - 15) / 2
+        increment ? (fromX + toX + 125) / 2 : (toX + fromX + 125) / 2,
+        increment ? (toY + fromY - 20) / 2 : (toY + fromY - 20) / 2
       );
     }
 
