@@ -1,17 +1,14 @@
-import { DrawContentArgs } from "../types";
+import { DrawContentArgs, TooltipCoordinates } from "../types";
 import { drawArrow } from "./draw-arrow";
 
-const headers = { "0x0": 0, "0x3": 1, "0x4": 2, "0x40": 3 } as any;
-
 export const drawContent = ({
-  coordinates,
   colorPallete,
-  directions,
+  coordinates,
+  headers,
+  data,
   ctx,
-}: DrawContentArgs) => {
-  const endCoordinates: any = {};
-
-  Object.entries(directions).forEach(([key, val]: any) => {
+}: DrawContentArgs): TooltipCoordinates[] => {
+  return Object.entries(data).reduce((obj: any, [key, val]: any) => {
     const color = colorPallete[val?.elder_id] ?? "black";
     ctx.strokeStyle = color;
     ctx.lineWidth = 2;
@@ -29,13 +26,13 @@ export const drawContent = ({
       ctx,
     });
 
-    endCoordinates[key] = {
+    obj[key] = {
       x: coordinates[val?.rcvd_time][`${headers[val?.tgt_node]}-x`],
       y: coordinates[val?.rcvd_time][`${headers[val?.tgt_node]}-y`],
       description: val?.description,
       increment,
     };
-  });
 
-  return endCoordinates;
+    return obj;
+  }, {} as TooltipCoordinates);
 };

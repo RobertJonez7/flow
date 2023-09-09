@@ -1,3 +1,5 @@
+import { GridData, GridElement } from "../types";
+
 const colors = [
   "red",
   "green",
@@ -11,10 +13,12 @@ const colors = [
   "black",
 ];
 
-export const createColorPallete = (data: any) => {
-  const keys = [...new Set(Object.values(data).map((d: any) => d?.elder_id))];
+export const createColorPallete = (data: GridData): Record<string, string> => {
+  const keys: string[] = [
+    ...new Set(Object.values(data).map((d: GridElement) => d?.elder_id)),
+  ];
   return keys.reduce((obj, val, i) => {
     if (!obj[val]) obj[val] = colors[i];
     return obj;
-  }, {});
+  }, {} as Record<string, string>);
 };

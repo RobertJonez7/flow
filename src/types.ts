@@ -14,7 +14,7 @@ export type ColorPallete = {
 };
 
 export type GridProps = {
-  data: any;
+  response: ResponseData;
   theme: string;
   isOpen: boolean;
   className: string;
@@ -44,8 +44,8 @@ export type GridOptions = {
   rows: number;
   width: number;
   height: number;
-  canvas: any;
-  ctx: any;
+  canvas: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
   offsetX: number;
   offsetY: number;
 };
@@ -53,7 +53,7 @@ export type GridOptions = {
 export type BuildGridArgs = {
   width: number;
   height: number;
-  ctx: any;
+  ctx: CanvasRenderingContext2D;
   offsetX: number;
   offsetY: number;
 };
@@ -72,7 +72,7 @@ export type Intersections = {
 };
 
 export type DrawArrowArgs = {
-  ctx: any;
+  ctx: CanvasRenderingContext2D;
   fromX: number;
   fromY: number;
   toX: number;
@@ -83,14 +83,15 @@ export type DrawArrowArgs = {
 
 export type DrawContentArgs = {
   coordinates: Intersections;
-  directions: any;
-  ctx: any;
+  data: GridData;
+  ctx: CanvasRenderingContext2D;
   colorPallete: ColorPallete;
+  headers: any;
 };
 
 export type InitCanvasArgs = {
-  canvas: any;
-  ctx: any;
+  canvas: HTMLCanvasElement;
+  ctx: CanvasRenderingContext2D;
   width: number;
   height: number;
 };
@@ -98,4 +99,33 @@ export type InitCanvasArgs = {
 export type GenerateToolTipArgs = {
   coordinates: Intersections;
   directions: any;
+};
+
+export type ResponseData = {
+  columns: string[];
+  rows: number[];
+  data: GridData;
+};
+
+export type GridData = {
+  [n: string]: GridElement;
+};
+
+export type GridElement = {
+  elder_id: string;
+  self_id: string;
+  sent_time: number;
+  rcvd_time: number;
+  src_node: string;
+  tgt_node: string;
+  channel: string;
+  description: string;
+  address: string;
+};
+
+export type TooltipCoordinates = {
+  x: number;
+  y: number;
+  description: string;
+  increment: boolean;
 };

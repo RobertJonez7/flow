@@ -1,7 +1,7 @@
 import "../App.css";
-import LegendValue from "./legend-value";
-import Switch from "./switch";
-import Button from "./button";
+import LegendValue from "./Legend-Value";
+import Switch from "./Switch";
+import Button from "./Button";
 import { SidebarProps } from "../types";
 
 const Sidebar = ({
