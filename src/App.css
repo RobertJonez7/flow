@@ -70,13 +70,15 @@ body {
 .column-headers {
   position: sticky;
   top: 0;
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
   margin: auto;
-  padding: 0.5em;
   font-weight: bold;
+}
+
+.column-container {
+  position: relative;
   background-color: var(--primary);
+  top: 1em;
+  margin-top: -1em;
 }
 
 .toggle-open-button {
@@ -105,12 +107,13 @@ body {
 
 /* Grid CSS */
 .canvas {
-  border-top: 1px solid var(--table-border-secondary);
+  /* border-top: 1px solid var(--table-border-secondary);
   border-bottom: 1px solid var(--table-border-secondary);
   border-left: 2px solid var(--table-border);
-  border-right: 2px solid var(--table-border);
+  border-right: 2px solid var(--table-border); */
   margin: 1em;
-  margin-top: 0.5em;
+  margin-top: 2em;
+  /* padding: 2em; */
 }
 
 /* Header CSS */
@@ -302,4 +305,5 @@ input:checked + .slider:before {
 
 .dom-overlay {
   position: absolute;
+  margin-top: 2em;
 }

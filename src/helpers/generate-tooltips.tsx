@@ -10,7 +10,7 @@ const generateTooltips = (coordinates: Intersections) => {
         <div
           style={{
             position: "absolute",
-            top: val?.y - 15,
+            top: val?.y - 18,
             left: val?.x + (val?.increment ? -12 : -25),
           }}
         >

@@ -25,10 +25,24 @@ const Grid = ({
     },
     {}
   );
-  const rowHeaders = response?.rows.map((r: number) => <div key={r}>{r}</div>);
-  const columnHeaders = response?.columns.map((c: string) => <div>{c}</div>);
+
   const width = (response?.columns?.length - 1) * 230;
   const height = response?.rows?.length * 50;
+
+  const generatecolumnHeaders = () => {
+    let i = 0;
+    return response?.columns?.reduce((arr, val) => {
+      const offset = (val.length * 16) / 4;
+      const elem = (
+        <div style={{ position: "absolute", left: i - offset }}>{val}</div>
+      );
+
+      arr.push(elem);
+      i += 230;
+
+      return arr;
+    }, [] as any);
+  };
 
   useEffect(() => {
     const options: GridOptions = {
@@ -46,8 +60,8 @@ const Grid = ({
     options.offsetY = Math.ceil(options.height / options.rows);
 
     const render = () => {
-      initCanvas(options);
-      buildGrid(options, theme);
+      initCanvas(options, theme);
+      buildGrid(options, theme, response?.rows);
       const coordinates = computeIntersectionsCoordinates(options);
       const tooltipCoordinates = drawContent(descriptions, {
         data: response?.data,
@@ -63,14 +77,16 @@ const Grid = ({
 
   return (
     <div className={className} style={{ marginRight: isOpen ? "25em" : 0 }}>
-      <div className="column-headers" style={{ width: width + 40 }}>
-        {columnHeaders}
+      <div className="column-headers" style={{ width }}>
+        <div
+          className="column-container"
+          style={{ width: width + 10, height: 20 }}
+        >
+          {generatecolumnHeaders()}
+        </div>
       </div>
       <div className="grid">
-        <div className="row-headers">{rowHeaders}</div>
-        <div>
-          <canvas ref={canvasRef} className="canvas" />
-        </div>
+        <canvas ref={canvasRef} className="canvas" />
         <div
           className="dom-overlay"
           style={{
@@ -80,7 +96,6 @@ const Grid = ({
         >
           {generateTooltips(tooltipCoordinates)}
         </div>
-        <div className="row-headers-right">{rowHeaders}</div>
       </div>
     </div>
   );
