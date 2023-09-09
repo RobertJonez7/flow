@@ -7,62 +7,80 @@ import { drawContent } from "../helpers/draw-content";
 import { initCanvas } from "../helpers/init-canvas";
 import { buildGrid } from "../helpers/build-grid";
 
-const Grid = ({ data, theme, isOpen, className }: GridProps): JSX.Element => {
+const Grid = ({
+  theme,
+  isOpen,
+  response,
+  className,
+  colorPallete,
+}: GridProps): JSX.Element => {
   const [tooltipCoordinates, setTooltipCoordinates] = useState<any>({});
   const canvasRef = useRef(null);
 
+  const headers = response?.columns.reduce(
+    (obj: Record<string, number>, val: string, i: number) => {
+      obj[val] = i;
+      return obj;
+    },
+    {}
+  );
+  const rowHeaders = response?.rows.map((r: number) => <div key={r}>{r}</div>);
+  const columnHeaders = response?.columns.map((c: string) => <div>{c}</div>);
+  const width = (response?.columns?.length - 1) * 230;
+  const height = response?.rows?.length * 50;
+
   useEffect(() => {
     const options: GridOptions = {
-      canvas: canvasRef.current as unknown as HTMLCanvasElement,
-      width: (data?.columns?.length - 1) * 230,
-      height: data?.rows?.length * 50,
-      cols: data?.columns?.length - 1,
-      rows: data?.rows?.length,
+      canvas: canvasRef.current as unknown as HTMLCanvasElement, // @ts-ignore
+      ctx: canvasRef.current.getContext("2d"),
+      cols: response?.columns?.length - 1,
+      rows: response?.rows.length,
       offsetX: 0,
       offsetY: 0,
-      ctx: 0,
+      height,
+      width,
     };
 
-    options.ctx = options.canvas.getContext("2d");
     options.offsetX = Math.ceil(options.width / options.cols);
     options.offsetY = Math.ceil(options.height / options.rows);
 
     const render = () => {
       initCanvas(options);
       buildGrid(options, theme);
-
       const coordinates = computeIntersectionsCoordinates(options);
-      const tooltipC = drawContent({
-        coordinates,
+      const tooltipCoordinates = drawContent({
+        data: response?.data,
         ctx: options?.ctx,
-        directions: data?.directions,
+        colorPallete,
+        coordinates,
+        headers,
       });
-
-      setTooltipCoordinates(tooltipC);
+      setTooltipCoordinates(tooltipCoordinates);
     };
     render();
   }, []);
 
-  const siderItems = data.rows.map((r: string) => (
-    <div className="sider-item" key={r}>
-      {r}
-    </div>
-  ));
-
   return (
     <div className={className} style={{ marginRight: isOpen ? "25em" : 0 }}>
-      <div className="sider">{siderItems}</div>
-      <canvas ref={canvasRef} className="canvas" />
-      <div
-        className="dom-overlay"
-        style={{
-          width: (data?.columns?.length - 1) * 230,
-          height: data?.rows?.length * 50,
-        }}
-      >
-        {generateTooltips(tooltipCoordinates)}
+      <div className="column-headers" style={{ width: width + 40 }}>
+        {columnHeaders}
       </div>
-      <div className="sider-right">{siderItems}</div>
+      <div className="grid">
+        <div className="row-headers">{rowHeaders}</div>
+        <div>
+          <canvas ref={canvasRef} className="canvas" />
+        </div>
+        <div
+          className="dom-overlay"
+          style={{
+            width,
+            height,
+          }}
+        >
+          {generateTooltips(tooltipCoordinates)}
+        </div>
+        <div className="row-headers-right">{rowHeaders}</div>
+      </div>
     </div>
   );
 };

@@ -1,11 +1,11 @@
 import "../App.css";
-import LegendValue from "./legend-value";
-import Switch from "./switch";
-import Button from "./button";
+import LegendValue from "./Legend-Value";
+import Switch from "./Switch";
+import Button from "./Button";
 import { SidebarProps } from "../types";
 
 const Sidebar = ({
-  data,
+  colorPallete,
   toggleOpen,
   isOpen,
   toggleTheme,
@@ -21,8 +21,8 @@ const Sidebar = ({
       <div className="sidebar">
         <div className="section">
           <h3>Legend</h3>
-          {Object.values(data?.legend).map((l: any) => {
-            return <LegendValue title={l?.title} color={l?.color} />;
+          {Object.entries(colorPallete).map(([key, val]: any) => {
+            return <LegendValue title={key} color={val} />;
           })}
         </div>
 
