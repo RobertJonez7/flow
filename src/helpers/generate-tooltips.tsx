@@ -1,5 +1,5 @@
 import React from "react";
-import Tooltip from "../components/Tooltips";
+import Tooltip from "../components/Tooltip";
 import { Intersections } from "../types";
 
 const generateTooltips = (coordinates: Intersections) => {
