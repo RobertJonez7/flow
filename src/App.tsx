@@ -66,10 +66,10 @@ const App = () => {
             </div>
           </p>
         ) : (
-          <>
+          <div className="content-container">
             <Header {...headerProps} />
             <Grid {...gridProps} />
-          </>
+          </div>
         )}
 
         <Sidebar {...sideBarProps} />

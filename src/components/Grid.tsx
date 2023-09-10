@@ -26,8 +26,8 @@ const Grid = ({
     {}
   );
 
-  const width = (response?.columns?.length - 1) * 230;
-  const height = response?.rows?.length * 50;
+  const width = (response?.columns?.length - 1) * 200;
+  const height = response?.rows?.length * 40;
 
   const generatecolumnHeaders = () => {
     let i = 0;
@@ -38,7 +38,7 @@ const Grid = ({
       );
 
       arr.push(elem);
-      i += 230;
+      i += 200;
 
       return arr;
     }, [] as any);
