@@ -51,7 +51,6 @@ body {
   align-items: flex-start;
   flex-direction: column;
   transition: 500ms;
-  max-width: 1200px;
   overflow-x: auto;
 }
 
