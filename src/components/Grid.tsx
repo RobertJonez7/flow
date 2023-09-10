@@ -84,10 +84,8 @@ const Grid = ({
       }}
     >
       <div className="grid">
-        <div style={{ display: "block" }}>
-          <div className="column-container" style={{ width, height: 40 }}>
-            {generatecolumnHeaders()}
-          </div>
+        <div className="column-container" style={{ width, height: 40 }}>
+          {generatecolumnHeaders()}
         </div>
         <canvas ref={canvasRef} className="canvas" />
         <div
