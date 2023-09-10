@@ -76,16 +76,19 @@ const Grid = ({
   }, [descriptions, response]);
 
   return (
-    <div className={className} style={{ marginRight: isOpen ? "25em" : 0 }}>
-      <div className="column-headers" style={{ width }}>
-        <div
-          className="column-container"
-          style={{ width: width + 10, height: 20 }}
-        >
-          {generatecolumnHeaders()}
-        </div>
-      </div>
+    <div
+      className={className}
+      style={{
+        marginRight: isOpen ? "25em" : 0,
+        maxWidth: isOpen ? 1200 : 1500,
+      }}
+    >
       <div className="grid">
+        <div style={{ display: "block" }}>
+          <div className="column-container" style={{ width, height: 40 }}>
+            {generatecolumnHeaders()}
+          </div>
+        </div>
         <canvas ref={canvasRef} className="canvas" />
         <div
           className="dom-overlay"
