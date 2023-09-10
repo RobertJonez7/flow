@@ -6,7 +6,7 @@ export const buildGrid = (
   rows: number[] | string[]
 ) => {
   // Row lines
-  for (let y = offsetY, i = 0; y < height + 50; y += offsetY, i++) {
+  for (let y = offsetY, i = 0; y < height + 40; y += offsetY, i++) {
     ctx.beginPath();
 
     ctx.lineWidth = 1;
@@ -17,9 +17,10 @@ export const buildGrid = (
     ctx.moveTo(0 + 100, y);
     ctx.lineTo(width + 100, y);
 
-    const yPos = i === 0 ? 40 : 44;
-    ctx.fillText(rows[i].toString(), 0, y - yPos);
-    ctx.fillText(rows[i].toString(), width + 150, y - yPos);
+    const yPos = i === 0 ? 30 : 34;
+
+    ctx.fillText(rows[i]?.toString(), 0, y - yPos);
+    ctx.fillText(rows[i]?.toString(), width + 150, y - yPos);
 
     ctx.stroke();
     ctx.closePath();
