@@ -9,28 +9,43 @@ import { createColorPallete } from "./helpers/create-color-pallete";
 import { useState } from "react";
 
 const App = () => {
-  const [theme, toggleTheme] = useState("light");
-  const [isOpen, toggleOpen] = useState(true);
-  const [descriptions, toggleDescriptions] = useState(false);
+  const [theme, toggleTheme] = useState(
+    localStorage.getItem("theme") ?? "light"
+  );
+  const [isOpen, toggleOpen] = useState(
+    (localStorage.getItem("isSidebarOpen") === "true" &&
+      localStorage.getItem("isSidebarOpen") != null) ??
+      true
+  );
+  const [descriptions, toggleDescriptions] = useState(
+    (localStorage.getItem("descriptions") === "true" &&
+      localStorage.getItem("descriptions") != null) ??
+      false
+  );
   const [fetched, setFetched] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
 
   const colorPallete = createColorPallete(response?.data);
 
+  const setSidebarOpen = (open: boolean) => {
+    const newSetting = open ? "true" : "false";
+    localStorage.setItem("isSidebarOpen", newSetting);
+    toggleOpen(open);
+  };
+
   const sideBarProps = {
+    toggleOpen: setSidebarOpen,
     toggleDescriptions,
     descriptions,
     colorPallete,
     toggleTheme,
-    toggleOpen,
     loading,
     isOpen,
     theme,
   };
   const headerProps = { isOpen, title: "ALL FLOWS" };
   const gridProps = {
-    className: "grid-container",
     colorPallete,
     descriptions,
     key: theme,
@@ -40,7 +55,7 @@ const App = () => {
   };
   const buttonProps = {
     className: "toggle-open-button",
-    fn: () => toggleOpen(true),
+    fn: () => setSidebarOpen(true),
     disabled: loading,
     title: "<<",
   };
@@ -57,7 +72,12 @@ const App = () => {
           >
             <div>
               {error ? (
-                <p className="error">{error}</p>
+                <>
+                  <p className="error">
+                    <span style={{ color: "rgb(224, 12, 12)" }}>Error:</span>{" "}
+                    {error}
+                  </p>
+                </>
               ) : (
                 <div className="loading-container">
                   <Loader /> Loading...

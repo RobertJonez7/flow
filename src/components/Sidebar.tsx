@@ -3,6 +3,7 @@ import LegendValue from "./Legend-Value";
 import Switch from "./Switch";
 import Button from "./Button";
 import { SidebarProps } from "../types";
+import Accordian from "./Accordian";
 
 const Sidebar = ({
   toggleDescriptions,
@@ -14,6 +15,22 @@ const Sidebar = ({
   isOpen,
   theme,
 }: SidebarProps) => {
+  const setTheme = () => {
+    toggleTheme((theme: string) => {
+      const newTheme = theme === "light" ? "dark" : "light";
+      localStorage.setItem("theme", newTheme);
+      return newTheme;
+    });
+  };
+
+  const setDescriptions = () => {
+    toggleDescriptions((description: boolean) => {
+      const newDescriptionSetting = !description ? "true" : "false";
+      localStorage.setItem("descriptions", newDescriptionSetting);
+      return !description;
+    });
+  };
+
   return (
     <div
       className="sidebar-container"
@@ -22,23 +39,18 @@ const Sidebar = ({
       }}
     >
       <div className="sidebar">
-        <div className="section">
-          <h3>Legend</h3>
-          {Object.entries(colorPallete).map(([key, val]: any) => {
-            return <LegendValue title={key} color={val} />;
-          })}
-        </div>
-
-        <div className="section">
-          <h3>Settings</h3>
+        <Accordian title="Legend">
+          <div style={{ marginBottom: "1em" }}>
+            {Object.entries(colorPallete).map(([key, val]: any) => {
+              return <LegendValue title={key} color={val} />;
+            })}
+          </div>
+        </Accordian>
+        <Accordian title="Settings">
           <div className="settings-content">
-            <div>
+            <div style={{ marginTop: "1em" }}>
               <Switch
-                fn={() =>
-                  toggleTheme((theme: string) =>
-                    theme === "light" ? "dark" : "light"
-                  )
-                }
+                fn={setTheme}
                 checked={theme === "dark"}
                 disabled={loading}
               />{" "}
@@ -46,9 +58,7 @@ const Sidebar = ({
             </div>
             <div>
               <Switch
-                fn={() =>
-                  toggleDescriptions((description: boolean) => !description)
-                }
+                fn={setDescriptions}
                 checked={descriptions}
                 disabled={loading}
               />{" "}
@@ -57,7 +67,7 @@ const Sidebar = ({
               </span>
             </div>
           </div>
-        </div>
+        </Accordian>
         <div className="toggle-button">
           <Button title=">>" fn={() => toggleOpen(false)} disabled={loading} />
         </div>

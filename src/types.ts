@@ -19,7 +19,6 @@ export type GridProps = {
   response: ResponseData;
   theme: string;
   isOpen: boolean;
-  className: string;
   colorPallete: ColorPallete;
   descriptions: boolean;
 };

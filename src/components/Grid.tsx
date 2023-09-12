@@ -10,7 +10,6 @@ import { buildGrid } from "../helpers/build-grid";
 const Grid = ({
   colorPallete,
   descriptions,
-  className,
   response,
   isOpen,
   theme,
@@ -77,7 +76,7 @@ const Grid = ({
 
   return (
     <div
-      className={className}
+      className="grid-container"
       style={{
         marginRight: isOpen ? "25em" : 0,
         maxWidth: isOpen ? 1200 : 1500,
