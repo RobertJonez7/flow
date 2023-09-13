@@ -2,9 +2,9 @@ import { useState } from "react";
 
 const Accordian = ({ children, title }: any): JSX.Element => {
   const [isOpen, toggleOpen] = useState(
-    (localStorage.getItem(title) === "true" &&
-      localStorage.getItem(title) != null) ??
-      true
+    localStorage.getItem(title) != null
+      ? localStorage.getItem(title) === "true"
+      : true
   );
 
   const setOpen = () => {

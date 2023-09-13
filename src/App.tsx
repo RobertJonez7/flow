@@ -1,5 +1,5 @@
 import "./App.css";
-import response from "./test/test-data";
+import responses from "./test/test-data";
 import Sidebar from "./components/Sidebar";
 import Loader from "./components/Loader";
 import Header from "./components/Header";
@@ -13,20 +13,20 @@ const App = () => {
     localStorage.getItem("theme") ?? "light"
   );
   const [isOpen, toggleOpen] = useState(
-    (localStorage.getItem("isSidebarOpen") === "true" &&
-      localStorage.getItem("isSidebarOpen") != null) ??
-      true
+    localStorage.getItem("isSidebarOpen") != null
+      ? localStorage.getItem("isSidebarOpen") === "true"
+      : true
   );
   const [descriptions, toggleDescriptions] = useState(
-    (localStorage.getItem("descriptions") === "true" &&
-      localStorage.getItem("descriptions") != null) ??
-      false
+    localStorage.getItem("descriptions") != null
+      ? localStorage.getItem("descriptions") === "true"
+      : false
   );
-  const [fetched, setFetched] = useState(false);
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState("");
+  const [response, setResponse] = useState("filler");
 
-  const colorPallete = createColorPallete(response?.data);
+  const colorPallete = createColorPallete(responses?.data);
 
   const setSidebarOpen = (open: boolean) => {
     const newSetting = open ? "true" : "false";
@@ -34,12 +34,38 @@ const App = () => {
     toggleOpen(open);
   };
 
+  const generatePreContent = () => {
+    if (error) {
+      return (
+        <p className="pre-content">
+          <span style={{ color: "rgb(224, 12, 12)", fontWeight: "bold" }}>
+            Error:
+          </span>{" "}
+          {error}
+        </p>
+      );
+    }
+    if (!response) {
+      return <p className="pre-content">No Data Found</p>;
+    }
+    if (loading) {
+      return (
+        <div className="loading-container">
+          <Loader /> Loading...
+        </div>
+      );
+    }
+  };
+
+  const preContent = generatePreContent();
+
   const sideBarProps = {
     toggleOpen: setSidebarOpen,
     toggleDescriptions,
     descriptions,
     colorPallete,
     toggleTheme,
+    response: responses,
     loading,
     isOpen,
     theme,
@@ -49,7 +75,7 @@ const App = () => {
     colorPallete,
     descriptions,
     key: theme,
-    response,
+    response: responses,
     isOpen,
     theme,
   };
@@ -63,28 +89,15 @@ const App = () => {
   return (
     <body data-theme={theme}>
       <div className="App">
-        {fetched || error || loading ? (
-          <p
-            className="data-found"
+        {preContent ? (
+          <div
+            className="pre-content-container"
             style={{
               marginRight: isOpen ? "25em" : 0,
             }}
           >
-            <div>
-              {error ? (
-                <>
-                  <p className="error">
-                    <span style={{ color: "rgb(224, 12, 12)" }}>Error:</span>{" "}
-                    {error}
-                  </p>
-                </>
-              ) : (
-                <div className="loading-container">
-                  <Loader /> Loading...
-                </div>
-              )}
-            </div>
-          </p>
+            {preContent}
+          </div>
         ) : (
           <div className="content-container">
             <Header {...headerProps} />

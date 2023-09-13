@@ -11,6 +11,7 @@ const Sidebar = ({
   colorPallete,
   toggleTheme,
   toggleOpen,
+  response,
   loading,
   isOpen,
   theme,
@@ -42,7 +43,16 @@ const Sidebar = ({
         <Accordian title="Legend">
           <div style={{ marginBottom: "1em" }}>
             {Object.entries(colorPallete).map(([key, val]: any) => {
-              return <LegendValue title={key} color={val} />;
+              return (
+                <LegendValue
+                  title={`${key}-${
+                    Object.values(response?.data).find(
+                      (r) => r.elder_id === key
+                    )?.address
+                  }`}
+                  color={val}
+                />
+              );
             })}
           </div>
         </Accordian>

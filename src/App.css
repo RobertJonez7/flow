@@ -102,10 +102,9 @@ body {
   cursor: default;
 }
 
-.data-found {
+.pre-content-container {
   margin-top: 5em;
   transition: 300ms;
-  font-weight: bold;
 }
 
 /* Grid CSS */
@@ -327,7 +326,7 @@ input:checked + .slider:before {
   height: 100vh;
 }
 
-.error {
+.pre-content {
   font-size: 1.25em;
   color: var(--color);
   height: 100vh;

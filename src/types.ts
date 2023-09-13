@@ -42,6 +42,7 @@ export type SidebarProps = {
   toggleDescriptions: any;
   descriptions: boolean;
   loading: boolean;
+  response: ResponseData;
 };
 
 export type GridOptions = {
