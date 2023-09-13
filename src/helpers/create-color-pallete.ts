@@ -1,17 +1,5 @@
+import colors from "./colors";
 import { GridData, GridElement } from "../types";
-
-const colors = [
-  "red",
-  "green",
-  "blue",
-  "yellow",
-  "orange",
-  "brown",
-  "teal",
-  "purple",
-  "pink",
-  "black",
-];
 
 export const createColorPallete = (data: GridData): Record<string, string> => {
   const keys: string[] = [
