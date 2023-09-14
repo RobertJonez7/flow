@@ -5,7 +5,7 @@ const LegendValue = ({ title, color }: LegendValueProps): JSX.Element => {
   return (
     <div className="legend-value-container">
       <div className="box" style={{ backgroundColor: color }} />
-      <p>{title}</p>
+      <p style={{ textAlign: "left" }}>{title}</p>
     </div>
   );
 };

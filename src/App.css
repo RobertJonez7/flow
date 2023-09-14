@@ -52,6 +52,7 @@ body {
   flex-direction: column;
   transition: 500ms;
   overflow-x: auto;
+  background-color: var(--primary);
 }
 
 .grid {
@@ -73,7 +74,9 @@ body {
   margin-bottom: 1em;
 }
 
-.toggle-open-button {
+.utility-buttons {
+  display: flex;
+  gap: 1em;
   position: fixed;
   bottom: 0;
   right: 0;
@@ -104,7 +107,6 @@ body {
 
 .pre-content-container {
   margin-top: 5em;
-  transition: 300ms;
 }
 
 /* Grid CSS */
@@ -137,7 +139,7 @@ body {
 }
 
 .box {
-  width: 1.5em;
+  min-width: 1.5em;
   height: 1em;
   border: 1px solid var(--border);
   margin-right: 1em;
@@ -158,6 +160,7 @@ body {
   background-color: var(--secondary);
   height: 100%;
   padding-top: 2em;
+  min-width: 20em;
 }
 
 .section {
@@ -170,13 +173,14 @@ body {
   flex-direction: column;
 }
 
-.toggle-button {
+.sidebar-utility {
   display: flex;
   position: fixed;
   align-items: center;
   justify-content: space-between;
   bottom: 0;
   margin: 3em;
+  margin-left: 2em;
   margin-bottom: 2em;
   width: 19em;
 }
@@ -330,6 +334,12 @@ input:checked + .slider:before {
   height: 100vh;
 }
 
+.sidebar-utility-buttons {
+  display: flex;
+  align-items: center;
+  gap: 1em;
+}
+
 .pre-content {
   font-size: 1.25em;
   color: var(--color);
@@ -344,7 +354,7 @@ input:checked + .slider:before {
 }
 
 .accordian-children {
-  overflow: hidden;
+  overflow: auto;
   transition: 250ms;
 }
 

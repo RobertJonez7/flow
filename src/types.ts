@@ -3,6 +3,7 @@ export type ButtonProps = {
   className?: string;
   fn: any;
   disabled?: boolean;
+  styles?: any;
 };
 
 export type SwitchProps = {
@@ -34,6 +35,7 @@ export type LegendValueProps = {
 
 export type SidebarProps = {
   connectionStatus: string;
+  pictureFn: any;
   colorPallete: ColorPallete;
   toggleOpen: any;
   isOpen: boolean;

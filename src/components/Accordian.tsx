@@ -31,7 +31,7 @@ const Accordian = ({ children, title }: any): JSX.Element => {
       <div
         className="accordian-children"
         style={{
-          maxHeight: isOpen ? "100vh" : 0,
+          maxHeight: isOpen ? "55vh" : 0,
         }}
       >
         {children}
