@@ -33,7 +33,9 @@ const Grid = ({
     return response?.columns?.reduce((arr, val) => {
       const offset = (val.length * 16) / 4;
       const elem = (
-        <div style={{ position: "absolute", left: i - offset }}>{val}</div>
+        <div className="header-elem" style={{ left: i - offset }}>
+          {val}
+        </div>
       );
 
       arr.push(elem);
@@ -75,29 +77,32 @@ const Grid = ({
   }, [descriptions, response]);
 
   return (
-    <div
-      className="grid-container"
-      style={{
-        marginRight: isOpen ? "25em" : 0,
-        maxWidth: isOpen ? 1200 : 1500,
-      }}
-    >
-      <div className="grid">
-        <div className="column-container" style={{ width, height: 40 }}>
-          {generatecolumnHeaders()}
-        </div>
-        <canvas ref={canvasRef} className="canvas" />
-        <div
-          className="dom-overlay"
-          style={{
-            width,
-            height,
-          }}
-        >
-          {generateTooltips(tooltipCoordinates)}
+    <>
+      <div className="cover" style={{ width: width + 250 }} />
+      <div
+        className="grid-container"
+        style={{
+          marginRight: isOpen ? "25em" : 0,
+          maxWidth: isOpen ? "60vw" : "75vw",
+        }}
+      >
+        <div className="grid">
+          <div className="column-container" style={{ width }}>
+            {generatecolumnHeaders()}
+          </div>
+          <canvas ref={canvasRef} className="canvas" />
+          <div
+            className="dom-overlay"
+            style={{
+              width,
+              height,
+            }}
+          >
+            {generateTooltips(tooltipCoordinates)}
+          </div>
         </div>
       </div>
-    </div>
+    </>
   );
 };
 
