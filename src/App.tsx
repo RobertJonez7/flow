@@ -1,14 +1,42 @@
 import "./App.css";
+import useWebSocket, { ReadyState } from "react-use-websocket";
 import responses from "./test/test-data";
 import Sidebar from "./components/Sidebar";
 import Loader from "./components/Loader";
 import Header from "./components/Header";
 import Button from "./components/Button";
 import Grid from "./components/Grid";
+import { useState, useEffect } from "react";
 import { createColorPallete } from "./helpers/create-color-pallete";
-import { useState } from "react";
 
 const App = () => {
+  const { readyState } = useWebSocket("ws://localhost:7070", {
+    onMessage: (e) => handleMessage(e?.data),
+    shouldReconnect: () => true,
+    reconnectAttempts: 10,
+    reconnectInterval: 3000,
+    share: true,
+  });
+
+  const connectionStatus = {
+    [ReadyState.CONNECTING]: "Connecting",
+    [ReadyState.OPEN]: "Open",
+    [ReadyState.CLOSING]: "Closing",
+    [ReadyState.CLOSED]: "Closed",
+    [ReadyState.UNINSTANTIATED]: "Uninstantiated",
+  }[readyState];
+
+  const handleMessage = async (data: string) => {
+    try {
+      setResponse(JSON.parse(data));
+      await new Promise((resolve) => setTimeout(resolve, 1000));
+      setLoading(false);
+    } catch (err: any) {
+      setLoading(false);
+      setError(err?.message ?? "Unable to fetch or display data.");
+    }
+  };
+
   const [theme, toggleTheme] = useState(
     localStorage.getItem("theme") ?? "light"
   );
@@ -22,11 +50,13 @@ const App = () => {
       ? localStorage.getItem("descriptions") === "true"
       : false
   );
-  const [loading, setLoading] = useState(false);
+  const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
-  const [response, setResponse] = useState("filler");
+  const [response, setResponse] = useState<any>("");
 
-  const colorPallete = createColorPallete(responses?.data);
+  // useEffect(() => {
+  //   return () => setResponse("");
+  // }, []);
 
   const setSidebarOpen = (open: boolean) => {
     const newSetting = open ? "true" : "false";
@@ -58,14 +88,16 @@ const App = () => {
   };
 
   const preContent = generatePreContent();
+  const colorPallete = createColorPallete(responses?.data);
 
   const sideBarProps = {
     toggleOpen: setSidebarOpen,
     toggleDescriptions,
+    connectionStatus,
     descriptions,
     colorPallete,
     toggleTheme,
-    response: responses,
+    response,
     loading,
     isOpen,
     theme,
@@ -75,12 +107,11 @@ const App = () => {
     colorPallete,
     descriptions,
     key: theme,
-    response: responses,
+    response,
     isOpen,
     theme,
   };
   const buttonProps = {
-    className: "toggle-open-button",
     fn: () => setSidebarOpen(true),
     disabled: loading,
     title: "<<",
@@ -106,7 +137,7 @@ const App = () => {
         )}
 
         <Sidebar {...sideBarProps} />
-        <Button {...buttonProps} />
+        <Button {...buttonProps} className="toggle-open-button" />
       </div>
     </body>
   );

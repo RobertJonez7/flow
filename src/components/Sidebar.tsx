@@ -7,6 +7,7 @@ import Accordian from "./Accordian";
 
 const Sidebar = ({
   toggleDescriptions,
+  connectionStatus,
   descriptions,
   colorPallete,
   toggleTheme,
@@ -32,6 +33,14 @@ const Sidebar = ({
     });
   };
 
+  const statusColors = {
+    Connecting: "#2196f3",
+    Open: "#46a949",
+    Closing: "#eca313",
+    Closed: "rgb(224, 12, 12)",
+    Uninstantiated: "#2196f3",
+  };
+
   return (
     <div
       className="sidebar-container"
@@ -41,20 +50,22 @@ const Sidebar = ({
     >
       <div className="sidebar">
         <Accordian title="Legend">
-          <div style={{ marginBottom: "1em" }}>
-            {Object.entries(colorPallete).map(([key, val]: any) => {
-              return (
-                <LegendValue
-                  title={`${key}-${
-                    Object.values(response?.data).find(
-                      (r) => r.elder_id === key
-                    )?.address
-                  }`}
-                  color={val}
-                />
-              );
-            })}
-          </div>
+          {!loading && (
+            <div style={{ marginBottom: "1em" }}>
+              {Object.entries(colorPallete).map(([key, val]: any) => {
+                return (
+                  <LegendValue
+                    title={`${key}-${
+                      Object.values(response?.data).find(
+                        (r) => r.elder_id === key
+                      )?.address
+                    }`}
+                    color={val}
+                  />
+                );
+              })}
+            </div>
+          )}
         </Accordian>
         <Accordian title="Settings">
           <div className="settings-content">
@@ -80,6 +91,17 @@ const Sidebar = ({
         </Accordian>
         <div className="toggle-button">
           <Button title=">>" fn={() => toggleOpen(false)} disabled={loading} />
+          <p>
+            Status:{" "}
+            <span
+              style={{
+                // @ts-ignore
+                color: statusColors[connectionStatus],
+              }}
+            >
+              {connectionStatus}
+            </span>
+          </p>
         </div>
       </div>
     </div>
