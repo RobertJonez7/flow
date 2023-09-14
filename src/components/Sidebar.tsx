@@ -6,6 +6,7 @@ import { SidebarProps } from "../types";
 import Accordian from "./Accordian";
 
 const Sidebar = ({
+  shouldLegendRender,
   toggleDescriptions,
   connectionStatus,
   descriptions,
@@ -13,7 +14,6 @@ const Sidebar = ({
   toggleTheme,
   toggleOpen,
   response,
-  loading,
   isOpen,
   theme,
 }: SidebarProps) => {
@@ -35,7 +35,7 @@ const Sidebar = ({
 
   const statusColors = {
     Connecting: "#2196f3",
-    Open: "#46a949",
+    Connected: "#46a949",
     Closing: "#eca313",
     Closed: "rgb(224, 12, 12)",
     Uninstantiated: "#2196f3",
@@ -50,7 +50,7 @@ const Sidebar = ({
     >
       <div className="sidebar">
         <Accordian title="Legend">
-          {!loading && (
+          {shouldLegendRender && (
             <div style={{ marginBottom: "1em" }}>
               {Object.entries(colorPallete).map(([key, val]: any) => {
                 return (
@@ -70,19 +70,11 @@ const Sidebar = ({
         <Accordian title="Settings">
           <div className="settings-content">
             <div style={{ marginTop: "1em" }}>
-              <Switch
-                fn={setTheme}
-                checked={theme === "dark"}
-                disabled={loading}
-              />{" "}
+              <Switch fn={setTheme} checked={theme === "dark"} />{" "}
               <span>{theme === "dark" ? "Light Mode" : "Dark Mode"}</span>
             </div>
             <div>
-              <Switch
-                fn={setDescriptions}
-                checked={descriptions}
-                disabled={loading}
-              />{" "}
+              <Switch fn={setDescriptions} checked={descriptions} />{" "}
               <span>
                 {descriptions ? "Hide Descriptions" : "Show Descriptions"}
               </span>
@@ -90,7 +82,7 @@ const Sidebar = ({
           </div>
         </Accordian>
         <div className="toggle-button">
-          <Button title=">>" fn={() => toggleOpen(false)} disabled={loading} />
+          <Button title=">>" fn={() => toggleOpen(false)} />
           <p>
             Status:{" "}
             <span

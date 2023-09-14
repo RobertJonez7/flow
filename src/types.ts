@@ -2,12 +2,11 @@ export type ButtonProps = {
   title: string;
   className?: string;
   fn: any;
-  disabled: boolean;
+  disabled?: boolean;
 };
 
 export type SwitchProps = {
   checked: boolean;
-  disabled: boolean;
   fn: any;
 };
 
@@ -42,7 +41,7 @@ export type SidebarProps = {
   theme: string;
   toggleDescriptions: any;
   descriptions: boolean;
-  loading: boolean;
+  shouldLegendRender: boolean;
   response: ResponseData;
 };
 

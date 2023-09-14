@@ -78,7 +78,7 @@ body {
   bottom: 0;
   right: 0;
   margin: 4em;
-  margin-bottom: 2em;
+  margin-bottom: 3em;
 }
 
 /* Button CSS */
@@ -334,6 +334,18 @@ input:checked + .slider:before {
   font-size: 1.25em;
   color: var(--color);
   height: 100vh;
+}
+
+.accordian-title {
+  transition: 250ms;
+  font-size: 1em;
+  margin-right: 0.5em;
+  margin-top: 0.1em;
+}
+
+.accordian-children {
+  overflow: hidden;
+  transition: 250ms;
 }
 
 @keyframes spin {

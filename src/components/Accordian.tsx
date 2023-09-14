@@ -19,12 +19,9 @@ const Accordian = ({ children, title }: any): JSX.Element => {
     <div className="section">
       <h3 onClick={setOpen} style={{ display: "flex", alignItems: "center" }}>
         <span
+          className="accordian-title"
           style={{
             transform: `rotate(${isOpen ? "90deg" : "0"})`,
-            transition: "250ms",
-            fontSize: "1em",
-            marginRight: ".5em",
-            marginTop: ".1em",
           }}
         >
           &#x25B8;
@@ -32,10 +29,9 @@ const Accordian = ({ children, title }: any): JSX.Element => {
         {title}
       </h3>
       <div
+        className="accordian-children"
         style={{
           maxHeight: isOpen ? "100vh" : 0,
-          overflow: "hidden",
-          transition: "250ms",
         }}
       >
         {children}

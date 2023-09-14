@@ -20,7 +20,7 @@ const App = () => {
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: "Connecting",
-    [ReadyState.OPEN]: "Open",
+    [ReadyState.OPEN]: "Connected",
     [ReadyState.CLOSING]: "Closing",
     [ReadyState.CLOSED]: "Closed",
     [ReadyState.UNINSTANTIATED]: "Uninstantiated",
@@ -53,10 +53,6 @@ const App = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState("");
   const [response, setResponse] = useState<any>("");
-
-  // useEffect(() => {
-  //   return () => setResponse("");
-  // }, []);
 
   const setSidebarOpen = (open: boolean) => {
     const newSetting = open ? "true" : "false";
@@ -91,6 +87,7 @@ const App = () => {
   const colorPallete = createColorPallete(responses?.data);
 
   const sideBarProps = {
+    shouldLegendRender: response && !loading && !error,
     toggleOpen: setSidebarOpen,
     toggleDescriptions,
     connectionStatus,
@@ -98,7 +95,6 @@ const App = () => {
     colorPallete,
     toggleTheme,
     response,
-    loading,
     isOpen,
     theme,
   };
