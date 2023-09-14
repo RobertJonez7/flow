@@ -1,6 +1,5 @@
 import "./App.css";
 import useWebSocket, { ReadyState } from "react-use-websocket";
-import responses from "./test/test-data";
 import Sidebar from "./components/Sidebar";
 import Loader from "./components/Loader";
 import Header from "./components/Header";
@@ -88,7 +87,7 @@ const App = () => {
   };
 
   const preContent = generatePreContent();
-  const colorPallete = createColorPallete(responses?.data);
+  const colorPallete = createColorPallete(response?.data);
 
   const sideBarProps = {
     shouldLegendRender: response && !loading && !error,

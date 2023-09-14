@@ -355,7 +355,6 @@ input:checked + .slider:before {
 
 .accordian-children {
   overflow: auto;
-  transition: 250ms;
 }
 
 @keyframes spin {
