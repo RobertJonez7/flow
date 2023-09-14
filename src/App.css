@@ -6,6 +6,7 @@
   --color: #2c2c2c;
   --table-border: black;
   --table-border-secondary: #2c2c2c;
+  --scroll: #b5b5b5;
 }
 
 [data-theme="dark"] {
@@ -15,6 +16,7 @@
   --color: #cccccc;
   --table-border: #cccccc;
   --table-border-secondary: #cccccc;
+  --scroll: #787878;
 }
 
 html,
@@ -139,6 +141,24 @@ body {
   height: 2em;
   background-color: var(--primary);
   z-index: 50;
+}
+
+::-webkit-scrollbar {
+  width: 0.75em;
+}
+
+/* Track */
+::-webkit-scrollbar-track {
+  /* box-shadow: inset 0 0 5px grey; */
+  background-color: var(--secondary);
+  border-radius: 10px;
+  border: 1px solid var(--border);
+}
+
+/* Handle */
+::-webkit-scrollbar-thumb {
+  background: var(--scroll);
+  border-radius: 10px;
 }
 
 .header-text {
