@@ -34,6 +34,7 @@ export type LegendValueProps = {
 };
 
 export type SidebarProps = {
+  connectionStatus: string;
   colorPallete: ColorPallete;
   toggleOpen: any;
   isOpen: boolean;

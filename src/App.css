@@ -171,10 +171,14 @@ body {
 }
 
 .toggle-button {
+  display: flex;
   position: fixed;
+  align-items: center;
+  justify-content: space-between;
   bottom: 0;
   margin: 3em;
   margin-bottom: 2em;
+  width: 19em;
 }
 
 .settings-content {
