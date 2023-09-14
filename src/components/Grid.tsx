@@ -1,7 +1,7 @@
 import "../App.css";
 import generateTooltips from "../helpers/generate-tooltips";
-import { useRef, useEffect, useState } from "react";
 import { computeIntersectionsCoordinates } from "../helpers/compute-intersection-coordinates";
+import { useRef, useEffect, useState } from "react";
 import { GridOptions, GridProps } from "../types";
 import { drawContent } from "../helpers/draw-content";
 import { initCanvas } from "../helpers/init-canvas";

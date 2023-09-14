@@ -6,8 +6,9 @@ import Loader from "./components/Loader";
 import Header from "./components/Header";
 import Button from "./components/Button";
 import Grid from "./components/Grid";
-import { useState, useEffect } from "react";
+import { exportComponentAsPNG } from "react-component-export-image";
 import { createColorPallete } from "./helpers/create-color-pallete";
+import { useState, useRef } from "react";
 
 const App = () => {
   const { readyState } = useWebSocket("ws://localhost:7070", {
@@ -28,6 +29,7 @@ const App = () => {
 
   const handleMessage = async (data: string) => {
     try {
+      setLoading(true);
       setResponse(JSON.parse(data));
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setLoading(false);
@@ -60,6 +62,8 @@ const App = () => {
     toggleOpen(open);
   };
 
+  const gridRef = useRef(null);
+
   const generatePreContent = () => {
     if (error) {
       return (
@@ -88,6 +92,7 @@ const App = () => {
 
   const sideBarProps = {
     shouldLegendRender: response && !loading && !error,
+    pictureFn: () => exportComponentAsPNG(gridRef),
     toggleOpen: setSidebarOpen,
     toggleDescriptions,
     connectionStatus,
@@ -128,12 +133,26 @@ const App = () => {
         ) : (
           <div className="content-container">
             <Header {...headerProps} />
-            <Grid {...gridProps} />
+            <div ref={gridRef}>
+              <Grid {...gridProps} />
+            </div>
           </div>
         )}
 
         <Sidebar {...sideBarProps} />
-        <Button {...buttonProps} className="toggle-open-button" />
+        <div className="utility-buttons">
+          <Button {...buttonProps} />
+          <Button
+            title="&dArr;"
+            fn={() => exportComponentAsPNG(gridRef)}
+            styles={{
+              fontSize: "1.25em",
+              height: "1.6em",
+              minWidth: "2.1em",
+              borderRadius: ".3em",
+            }}
+          />
+        </div>
       </div>
     </body>
   );

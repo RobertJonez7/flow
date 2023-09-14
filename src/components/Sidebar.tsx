@@ -1,9 +1,9 @@
 import "../App.css";
 import LegendValue from "./Legend-Value";
+import Accordian from "./Accordian";
 import Switch from "./Switch";
 import Button from "./Button";
 import { SidebarProps } from "../types";
-import Accordian from "./Accordian";
 
 const Sidebar = ({
   shouldLegendRender,
@@ -13,6 +13,7 @@ const Sidebar = ({
   colorPallete,
   toggleTheme,
   toggleOpen,
+  pictureFn,
   response,
   isOpen,
   theme,
@@ -35,7 +36,7 @@ const Sidebar = ({
 
   const statusColors = {
     Connecting: "#2196f3",
-    Connected: "#46a949",
+    Connected: "#3c903e",
     Closing: "#eca313",
     Closed: "rgb(224, 12, 12)",
     Uninstantiated: "#2196f3",
@@ -81,8 +82,20 @@ const Sidebar = ({
             </div>
           </div>
         </Accordian>
-        <div className="toggle-button">
-          <Button title=">>" fn={() => toggleOpen(false)} />
+        <div className="sidebar-utility">
+          <div className="sidebar-utility-buttons">
+            <Button title=">>" fn={() => toggleOpen(false)} />
+            <Button
+              title="&dArr;"
+              fn={pictureFn}
+              styles={{
+                fontSize: "1.25em",
+                height: "1.6em",
+                minWidth: "2.1em",
+                borderRadius: ".3em",
+              }}
+            />
+          </div>
           <p>
             Status:{" "}
             <span

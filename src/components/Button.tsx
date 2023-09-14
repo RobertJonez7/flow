@@ -6,10 +6,16 @@ const Button = ({
   fn,
   className,
   disabled,
+  styles,
 }: ButtonProps): JSX.Element => {
   return (
     <div className={className}>
-      <button className="button" onClick={fn} disabled={disabled}>
+      <button
+        className="button"
+        onClick={fn}
+        disabled={disabled}
+        style={styles}
+      >
         {title}
       </button>
     </div>
