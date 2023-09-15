@@ -2,9 +2,9 @@
 
 ## General Information
 
-This app uses `websockets` to listen for updates and then automatically draw the diagram to the screen. By default, it is listening
+Flow uses `websockets` to listen for updates and then automatically draws the diagram to the screen. By default, it is listening
 on `ws://localhost:7070`, this can be altered by changing the value in the `App.tsx` file. Instead of DOM manipulation, this application
-utlizes `canvas`, which is less expensisve to draw sprites on the screen.
+utlizes `canvas` to create the graph, which is less expensisve to draw sprites on the screen.
 
 ## Data Expectation
 
@@ -52,7 +52,7 @@ Flow expects to recieve a **stringified JSON object**. Here is an example of wha
 
 ## Features
 
-- Tooltip appears on screen on hover of arrows
+- Tooltip appears on hover over arrows
 - Dark mode available
 - Ability to draw decriptions next to arrows
 - Your preferences are saved and will persist as long as you don't clear your browsers cache.
