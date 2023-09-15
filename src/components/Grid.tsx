@@ -63,7 +63,10 @@ const Grid = ({
     const render = () => {
       initCanvas(options, theme);
       buildGrid(options, theme, response?.rows);
-      const coordinates = computeIntersectionsCoordinates(options);
+      const coordinates = computeIntersectionsCoordinates(
+        options,
+        response?.rows
+      );
       const tooltipCoordinates = drawContent(descriptions, {
         data: response?.data,
         ctx: options?.ctx,
