@@ -40,9 +40,9 @@ Flow expects to recieve a **stringified JSON object**. Here is an example of wha
       }
 ```
 
-`rows`: Denotes to the row headers on the side of the graph. Send these in the order you want displayed.
-`columns`: Denotes to the column headers on top of the graph. Send these in the order you want displayed.
-`data`: Denotes to an object or dictionary of data. This is the main meat of the graph and will render how the content is drawn on the screen.
+- `rows`: Denotes to the row headers on the side of the graph. Send these in the order you want displayed.
+- `columns`: Denotes to the column headers on top of the graph. Send these in the order you want displayed.
+- `data`: Denotes to an object or dictionary of data. This is the main meat of the graph and will render how the content is drawn on the screen.
 
 ## Running the Web App
 
