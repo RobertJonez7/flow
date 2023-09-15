@@ -29,6 +29,7 @@ const App = () => {
   const handleMessage = async (data: string) => {
     try {
       setLoading(true);
+      setError("");
       setResponse(JSON.parse(data));
       await new Promise((resolve) => setTimeout(resolve, 1000));
       setLoading(false);
@@ -113,7 +114,6 @@ const App = () => {
   };
   const buttonProps = {
     fn: () => setSidebarOpen(true),
-    disabled: loading,
     title: "<<",
   };
 
