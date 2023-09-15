@@ -1,7 +1,5 @@
 # Getting Started
 
-## General Information
-
 Flow uses `websockets` to listen for updates and then automatically draws the diagram to the screen. By default, it is listening
 on `ws://localhost:7070`, this can be altered by changing the value in the `App.tsx` file. Instead of DOM manipulation, this application
 utlizes `canvas` to create the graph, which is less expensisve to draw sprites on the screen.
@@ -44,9 +42,9 @@ Flow expects to recieve a **stringified JSON object**. Here is an example of wha
 - `columns`: Denotes to the column headers on top of the graph. Send these in the order you want displayed.
 - `data`: Denotes to an object or dictionary of data. This is the main meat of the graph and will render how the content is drawn on the screen.
 
-## Running the Web App
+## Running Flow
 
-- If this is your first time using the web app, run `npm i`
+- If this is your first time using flow, run `npm i`
 - Run `npm start`, it will then open a new browser.
 - To check to see if the app has connected to your server, locate the `Status` on the bottom right of the side bar.
 
