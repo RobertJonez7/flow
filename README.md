@@ -1,4 +1,4 @@
-# Getting Started
+## Getting Started
 
 Flow uses `websockets` to listen for updates and then automatically draws the diagram to the screen. By default, it is listening
 on `ws://localhost:7070`, this can be altered by changing the value in the `App.tsx` file. Instead of DOM manipulation, this application
