@@ -10,13 +10,16 @@ import { createColorPallete } from "./helpers/create-color-pallete";
 import { useState, useRef } from "react";
 
 const App = () => {
-  const { readyState } = useWebSocket("ws://localhost:7070", {
-    onMessage: (e) => handleMessage(e?.data),
-    shouldReconnect: () => true,
-    reconnectAttempts: 10,
-    reconnectInterval: 3000,
-    share: true,
-  });
+  const { readyState } = useWebSocket(
+    process.env.REACT_APP_SERVER_ADDRESS ?? "ws://localhost:7070",
+    {
+      onMessage: (e) => handleMessage(e?.data),
+      shouldReconnect: () => true,
+      reconnectAttempts: 10,
+      reconnectInterval: 3000,
+      share: true,
+    }
+  );
 
   const connectionStatus = {
     [ReadyState.CONNECTING]: "Connecting",

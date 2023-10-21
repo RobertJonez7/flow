@@ -6,6 +6,12 @@ import { GridOptions, GridProps } from "../types";
 import { drawContent } from "../helpers/draw-content";
 import { initCanvas } from "../helpers/init-canvas";
 import { buildGrid } from "../helpers/build-grid";
+import {
+  COVER_WIDTH,
+  HEADER_OFFSET,
+  ROW_HEIGHT,
+  ROW_WIDTH,
+} from "../helpers/constants";
 
 const Grid = ({
   colorPallete,
@@ -25,13 +31,13 @@ const Grid = ({
     {}
   );
 
-  const width = (response?.columns?.length - 1) * 200;
-  const height = response?.rows?.length * 40;
+  const width = (response?.columns?.length - 1) * ROW_WIDTH;
+  const height = response?.rows?.length * ROW_HEIGHT;
 
   const generatecolumnHeaders = () => {
     let i = 0;
     return response?.columns?.reduce((arr, val) => {
-      const offset = (val.length * 16) / 4;
+      const offset = (val.length * HEADER_OFFSET) / 4;
       const elem = (
         <div className="header-elem" style={{ left: i - offset }}>
           {val}
@@ -39,7 +45,7 @@ const Grid = ({
       );
 
       arr.push(elem);
-      i += 200;
+      i += ROW_WIDTH;
 
       return arr;
     }, [] as any);
@@ -81,7 +87,7 @@ const Grid = ({
 
   return (
     <>
-      <div className="cover" style={{ width: width + 250 }} />
+      <div className="cover" style={{ width: width + COVER_WIDTH }} />
       <div
         className="grid-container"
         style={{
