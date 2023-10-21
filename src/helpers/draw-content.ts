@@ -1,5 +1,12 @@
 import { DrawContentArgs, TooltipCoordinates } from "../types";
 import { drawArrow } from "./draw-arrow";
+import {
+  ARROW_OFFSET,
+  ARROW_X_OFFSET,
+  ARROW_Y_OFFSET,
+  DESCRIPTIONS_X_OFFSET,
+  DESCRIPTIONS_Y_OFFSET,
+} from "./constants";
 
 export const drawContent = (
   descriptions: boolean,
@@ -18,9 +25,9 @@ export const drawContent = (
     ctx.lineWidth = 2.5;
 
     drawArrow({
-      toX: toX + (increment ? +7 : -7) + 100,
-      fromX: fromX + 100,
-      toY: toY - 5,
+      toX: toX + (increment ? +ARROW_X_OFFSET : -ARROW_X_OFFSET) + ARROW_OFFSET,
+      fromX: fromX + ARROW_OFFSET,
+      toY: toY - ARROW_Y_OFFSET,
       radius: 5,
       color,
       fromY,
@@ -28,12 +35,11 @@ export const drawContent = (
     });
 
     if (descriptions) {
+      const textPositionX = (toX + fromX + DESCRIPTIONS_X_OFFSET) / 2;
+      const textPosistionY = (toY + fromY - DESCRIPTIONS_Y_OFFSET) / 2;
       ctx.font = "14px Arial";
-      ctx.fillText(
-        val?.description,
-        increment ? (fromX + toX + 125) / 2 : (toX + fromX + 125) / 2,
-        increment ? (toY + fromY - 20) / 2 : (toY + fromY - 20) / 2
-      );
+
+      ctx.fillText(val?.description, textPositionX, textPosistionY);
     }
 
     obj[key] = {

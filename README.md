@@ -48,6 +48,9 @@ Flow expects to recieve a **stringified JSON object**. Here is an example of wha
 - Run `npm start`, it will then open a new browser.
 - To check to see if the app has connected to your server, locate the `Status` on the bottom right of the side bar.
 
+- **Note:** To change your port, locate the `.env` file and change the value of the `PORT` variable (Defaults to `3000`). To change the server address where it's listening for data,
+  change the `REACT_APP_SERVER_ADDRESS` variable (Defaults to `ws://localhost:7070`).
+
 ## Features
 
 - Tooltip appears on hover over arrows
